@@ -11,25 +11,26 @@ pipeline{
        }
         stage("TF Init"){
             steps{
-                sh 'terraform init'
                 echo "Executing Terraform Init"
+                sh 'terraform init'
             }
         }
         stage("TF Validate"){
             steps{
                 echo "Validating Terraform Code"
+                sh 'terraform validate'
             }
         }
         stage("TF Plan"){
             steps{
-                sh 'terraform plan'
                 echo "Executing Terraform Plan"
+                sh 'terraform plan'
             }
         }
         stage("TF Apply"){
             steps{
-                sh 'terraform apply -auto-approve'
                 echo "Executing Terraform Apply"
+                sh 'terraform apply -auto-approve'
             }
         }
         stage("Invoke Lambda"){
