@@ -16,29 +16,3 @@ resource "aws_subnet" "private" {
   })
 }
 
-resource "aws_lambda_function" "lambda" {
-  function_name = "invoke_lambda"
-  filename         = data.archive_file.zip.output_path
-  source_code_hash = data.archive_file.zip.output_base64sha256
-  role    = aws_iam_role.iam_for_lambda.arn
-  handler = "lambda_function.lambda_handler"
-  runtime = "python3.6"
-}
-
-data "aws_lambda_invocation" "lambda1" {
-  function_name = aws_lambda_function.lambda_function_test.function_name
-
-  input = <<JSON
-{
-  payload = {
-  "subnet_id": "private-subnet-1",
-  "name": "vivekdhake",
-  "email": "vivekdhake86@gmail.com"
- }
-}
-JSON
-}
-
-output "result_entry" {
-  value = jsondecode(data.aws_lambda_invocation.example.result)["key1"]
-}
