@@ -3,9 +3,10 @@ pipeline{
     stages{
         stage('terraform') {
           steps {
-            sh 'sudo yum install -y yum-utils'
-            sh 'sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo'
-            sh 'sudo yum -y install terraform'
+            sh 'yum update -y'
+            sh 'yum install -y yum-utils'
+            sh 'yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo'
+            sh 'yum -y install terraform'
           }
        }
         stage("TF Init"){
