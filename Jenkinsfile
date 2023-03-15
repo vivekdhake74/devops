@@ -11,6 +11,7 @@ pipeline{
        }
         stage("TF Init"){
             steps{
+                sh 'terraform init'
                 echo "Executing Terraform Init"
             }
         }
@@ -21,11 +22,13 @@ pipeline{
         }
         stage("TF Plan"){
             steps{
+                sh 'terraform plan'
                 echo "Executing Terraform Plan"
             }
         }
         stage("TF Apply"){
             steps{
+                sh 'terraform apply -auto-approve'
                 echo "Executing Terraform Apply"
             }
         }
